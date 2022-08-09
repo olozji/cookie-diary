@@ -1,0 +1,621 @@
+/* font */
+@import url('https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css');
+
+
+body {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: '-apple-system', 'BlinkMacSystemFont', 'Apple SD Gothic Neo',
+  'Inter', 'Spoqa Han Sans', 'Segoe UI', Sans-Serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  
+}
+
+:focus, :hover, :visited, :link, :active {
+  color: #000;
+  text-decoration: none;
+}
+
+@media (min-width: 650px ){
+  .App{
+    width: 640px;
+  }
+}
+
+@media (max-width: 650px){
+  .App{
+    width: 90vw;
+  }
+}
+
+#root {
+  background-color: #F5F5F7;
+  box-shadow: rgba(100,100,111,0.2) 0px 70x 29px 0px;
+}
+.App{
+  min-height: 100vh;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* MainNav */
+
+.main_nav_header {
+  padding: 0px;
+  display: flex;
+  justify-content:right;
+  border-bottom: 1px solid #e2e2e2;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.main_nav_header ul {
+  display: flex;
+}
+
+.main_nav_header ul li {
+  margin: 5px;
+  font-size: 14px;
+  list-style: none;
+  text-decoration: none;
+}
+
+.btn_logout {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+
+/* Auth */
+
+.Auth_section {
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  min-height: 100vh;
+  border: 1px solid #ececec;
+  margin-top: 10px;
+  border-radius: 50px;
+}
+
+.Auth_section .Auth_container {
+  margin-top: 80px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.Auth_section .Auth_container img{
+  width: 150px;
+}
+
+.Auth_section p {
+  font-size: 35px;
+  font-weight: 600;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.Auth_section h1 {
+  margin-top: 40px;
+  font-size: 28px;
+  font-weight: 400;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.Auth_section span {
+  font-size: 48px;
+  font-weight: 400;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  border-bottom:5px solid #FFB72B;
+}
+
+.auth_form {
+  margin-top:70px;
+}
+
+.email_input label{
+ margin-right: 20px;
+ font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.email_input input{
+  width: 250px;
+  height: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background:#f2f2f2;
+}
+
+.password_input label{
+  margin-right: 10px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.password_input input{
+  width: 250px;
+  height: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background:#f2f2f2;
+}
+
+.auth_btn {
+  margin-top: 30px;
+}
+
+.auth_btn button{
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  border: none;
+  background-color: #FFB72B;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  cursor: pointer;
+}
+
+/* Profile */
+
+.profile_section {
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  min-height: 100vh;
+  border: 1px solid #ececec;
+  border-radius: 50px;
+  margin-top: 10px;
+}
+
+.profile_section h2 {
+  padding: 10px;
+  margin-top: 80px;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.profile_section h1 {
+  padding: 10px;
+  margin-top: 70px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.profile_form {
+  margin-top: 60px;
+}
+
+.profile_form label {
+  margin-left: 10px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.profile_form input {
+  width: 250px;
+  height: 30px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background:#f2f2f2;
+}
+
+.profile_btn {
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  border: none;
+  background-color: #FFB72B;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  cursor: pointer;
+}
+
+.profile_cancel {
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  background-color: #fd565f;
+  color:#fff;
+  cursor: pointer;
+}
+
+
+
+/* Header */
+
+header {
+  padding: 20px 0 20px 0px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e2;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+header > div {
+  display: flex;
+}
+
+header .head_Text {
+  width: 50%;
+  font-size: 20px;
+  justify-content: center;
+}
+
+header .left_Btn {
+  width: 25%;
+  justify-content: start;
+}
+
+header .right_Btn {
+  width: 25%;
+  justify-content: end;
+}
+
+/* Button */
+
+.btn {
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  white-space: nowrap;
+  background-color: #F5F5F7;
+  color:black;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.btn_default {
+  background-color: #FFB72B;
+  color:#fff;
+}
+
+.btn_complete {
+  background-color: #1687ED;
+  color:#fff;
+}
+
+.btn_remove {
+  background-color: #fd565f;
+  color:#fff;
+}
+
+/* DiaryList */
+
+.DiaryList {
+  border-radius: 5px;
+  height: auto;
+  min-height: 80vh;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.DiaryList .menu_wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+ 
+  display: flex;
+  justify-content:space-between;
+}
+
+.DiaryList .menu_wrapper .right_col{
+  width: 50px;
+}
+
+.DiaryList .menu_wrapper .right_col button{
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50px;
+}
+
+.DiaryList .SelectMenu {
+  /* width: 200px; */
+  margin-right: 10px;
+  border: 1px solid rgb(224, 227, 231);
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* DiaryItem */
+
+.DiaryItem {
+  margin-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 1px solid rgb(224, 227, 231);
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  color:rgb(26, 32, 39);
+}
+
+.DiaryItem:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition-property: box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0ms; 
+}
+
+.DiaryItem .emotion_img_wrapper {
+  margin-left: 10px;
+  cursor: pointer;
+  min-width: 120px;
+  height: 80px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  background-color:#f5f5f7;
+}
+
+.DiaryItem .emotion_img_wrapper img{
+  margin-top: 15px;
+  width: 40%;
+  height: 60%;
+}
+
+.DiaryItem .content{
+  flex-grow: 1;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.DiaryItem .content_image {
+  margin: 10px 0 10px 0;
+}
+
+.DiaryItem .content_preview{
+  margin-top: 10px;
+}
+
+.DiaryItem .btn_edit {
+  margin: 10px;
+}
+
+.DiaryItem .uploadImage_wrapper {
+  min-width: 150px;
+  height: 150px;
+  border-bottom: 1px solid #ececec;
+}
+
+/* DiaryEditor */
+
+.DiaryEditor section {
+  margin-bottom: 40px;
+}
+
+.DiaryEditor h4 {
+  font-size: 20px;
+  font-weight: 200;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  
+}
+
+.DiaryEditor .input_box {
+  display: flex;
+}
+
+.DiaryEditor .input_date {
+  border: 2px solid #17D7A0;
+  color:#17D7A0;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #f5f5f2;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.DiaryEditor .emotion_list_wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  gap: 2%;
+}
+
+.DiaryEditor .image_title {
+  font-size: 14px;
+  font-weight:400;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.DiaryEditor #image_input {
+  display: none;
+}
+
+.DiaryEditor .image_icon {
+  display:flex;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.DiaryEditor textarea {
+  width: 100%;
+  min-height: 250px;
+  border: none;
+  border-radius: 5px;
+}
+
+.DiaryEditor .control_btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* EmotionItem */
+
+.EmotionItem {
+  border-radius: 50%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.EmotionItem img {
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.EmotionItem_off{
+  background-color: none;
+}
+
+.EmotionItem_on_1 {
+  background-color: #fdce17;
+  color: #fff;
+} 
+
+.EmotionItem_on_2 {
+  background-color: #d070fb;
+  color: #fff;
+} 
+
+.EmotionItem_on_3 {
+  background-color: #9dd772;
+  color: #fff;
+} 
+
+.EmotionItem_on_4 {
+  background-color: #4b89dc;
+  color: #fff;
+} 
+
+.EmotionItem_on_5 {
+  background-color: #fd565f;
+  color: #fff;
+} 
+.EmotionItem span {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+/* Diary */
+
+.DiaryPage section {
+  margin-top:30px;
+  width: 100%;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.DiaryPage span {
+ 
+  font-size: 22px;
+  font-weight: 400;
+  border-bottom: 5px solid #17D7A0;
+}
+
+.DiaryPage .diary_image_wrapper {
+  margin-top: 20px;
+  width: 250px;
+  height: 200px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.DiaryPage .diary_image_wrapper img{
+  width: 100px;
+  height: 100px;
+}
+
+.DiaryPage .diary_image_description {
+  font-size: 25px;
+  font-weight: 600;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  color:#17D7A0;
+}
+.DiaryPage .diary_image_description:active {
+  font-weight:600;
+  border-bottom:2px solid #ff6c00;
+  color:#FFB72B;
+  
+}
+
+.DiaryPage .diary_content_wrapper {
+  margin-top: 30px;
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 5px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.DiaryPage .diary_content_wrapper p {
+  padding: 20px;
+  font-size: 20px;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  font-weight: 400;
+  line-height: 2.5;
+}
+
+.input_image {
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.input_loading {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+  }
+
+.input_image {
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  }
+
+.loading_Img {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  border: 2px solid lightgrey;
+  border-top: 4px solid lightpink;
+  animation: spin 2s linear infinite;
+  }
