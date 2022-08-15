@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+#  감정쿠킹 Diary
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+- 그날의 하루를 기록할 수 있는 다이어리 웹앱입니다.
+- 쿠키를 통한 나의 감정을 살펴보고 일기를 쓰며 그 날의 감정을 나쁨 , 보통 , 좋음으로 나눠 사진을 올리거나 일기를 쓸 수 있습니다.
+- 그날의 사진을 불러와 저장할 수 있습니다.
+- 일기장에 담긴 나의 기분을 분석하고, 어떤 하루였는지 보여줄 수 있습니다.
 
-## Available Scripts
+## How to start project
+Local 환경에서 실행하는 것을 가정했을 때 필요한 것들   
+  ```
+  1 Firebase API Key
+  https://console.firebase.google.com/?hl=ko 로 접속하여 API Key를 생성
 
-In the project directory, you can run:
+  2 Cloudinary Image Upload URL 생성
+  https://cloudinary.com/ 사이트에 접속
 
-### `npm start`
+  #3 npm install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  #4 npm start
+  ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 감정쿠킹 일기를 만든 이유
+수많은 감정을 표현하는 방법에는 여러가지가 있지만 가장 좋은 것은 기록이 아닐까 생각으로 일기장 프로젝트를 시작하게 되었습니다.
 
-### `npm test`
+특히나 쿠키에 감정을 부여하여 나만의 감정이 담긴 쿠키가 만들어진다는 컨셉으로 나의 감정에 좀 더 친근하게 다가갈 수 있도록 기획했습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+사진을 올리고 수정하고 삭제하고 어디서든 쉽게 작성하고, 열어볼 수 있는 나만의 감정일기 웹앱입니다. 
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Demo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. 로그인 화면
+로그인 창을 새로운 DOM에 Rendering하는 것으로 구현했습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. 내 일기장 리스트
+사진이 있을 경우 사진을, 사진이 없을 경우 제목을 preview 형식으로 볼 수 있습니다.
 
-### `npm run eject`
+3. 일기 작성
++ 버튼을 클릭하여 새로운 일기를 작성하고 형성한 diaryitem 컴포넌트를 새로운 DOM에 그려줍니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. 감정 분석
+나의 쿠키에 추가할 감정들을 선택하게 되면 토대로 그 날의 쿠키들을 나쁨 , 보통 , 좋음으로 나눠 그날의 쿠키를 생성합니다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. 일기장 열기
+일기 item을 클릭해서 일기장을 열었을 때 useContext 이용해 데이터를 불러오고 useEffect를 통해 id값을 매칭하여 새로운 DOM위에 렌더링하였습니다. 일기장에는 수정하기 , 삭제 기능이 포함되어 있습니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 프로젝트 완성 후 소감
+흔히 많은 일기장 프로젝트를 보며 좀 더 차별화를 두려 여러가지 로직들을 생각하여 구현하려 했고 일기장 로직은 복잡하지 않고 간단하였습니다. 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+하지만 useContext 로만 상태관리를 하다보니 props를 타고타고 넘어가는 경우가 있어 상태 관리로 인해 다소 어렵게 느껴졌던 점이 있었습니다.
 
-## Learn More
+복잡한 만큼 많은 컴포넌트들이 필요했고, 이를 하나하나 만들어냄으로써 리액트에 점점 더 익숙해질 수 있었습니다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+프로젝트를 통해 경험으로 녹여 낸 덕에 한층 자신감을 얻기도 했고, 충분한 고민의 선행 과정을 통해 문제를 해결해나가는 방식으로 앞으로 적용되어야 하거나 보완되어야 할 점들을 살필 수 있었으며, 프론트엔드 개발의 재미가 느껴졌던 기회였습니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
