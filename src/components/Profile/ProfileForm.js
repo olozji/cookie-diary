@@ -39,7 +39,7 @@ const ProfileForm = () => {
       </div>
       <div>
         <button className="profile_btn" onClick={()=>alert('변경시 바꾸실 수 없습니다. 그래도 변경 하시겠습니까?')}>비밀번호 변경</button>
-        <button className="profile_cancel" onClick={()=>navigate(-1)}>취소 하기</button>
+        <button className="profile_cancel" onClick={()=>navigate('/home')}>취소 하기</button>
       </div>
     </form>
   );
