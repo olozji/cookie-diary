@@ -22,7 +22,7 @@ const KakaoLoginComponent = () => {
       onSuccess={responseKaKao}
       onFail={console.error}
       onLogout={console.info}
-      href={KAKAO_AUTH_URL}
+      REDIRECT_URI={KAKAO_AUTH_URL}
     />
   );
 };
