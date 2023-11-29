@@ -111,6 +111,20 @@ body {
   border-bottom:5px solid #FFB72B;
 }
 
+.Auth_form {
+  padding-top:30px;
+  display:inline-flex;
+  justify-content: center;
+  align-items:center;
+  gap:10px;
+  color:#d2d2d2;
+}
+
+.Auth_form span {
+  width:150px;
+  border-bottom:1px solid #d2d2d2;
+}
+
 .auth_form {
   margin-top:70px;
 }

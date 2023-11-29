@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../store/AuthContext';
 
+
 const MainNavigation = () => {
    const authCtx = useContext(AuthContext);
    const isLoggedIn = authCtx.isLoggedIn;
@@ -29,6 +30,12 @@ const MainNavigation = () => {
     }
   };
 
+  const handleLogout = () => {
+    // Kakao SDK의 로그아웃 메서드 호출
+    window.Kakao.Auth.logout();
+  };
+
+
   return (
     <header className="main_nav_header">
       <nav className="main_nav">
@@ -45,7 +52,7 @@ const MainNavigation = () => {
           )}
           {isLoggedIn && (
             <li>
-            <Link to='/'><button className='btn_logout' onClick={logoutHandler}>Logout</button></Link>
+            <Link to='/'><button className='btn_logout' onClick={handleLogout}>Logout</button></Link>
           </li>
           )}
         </ul>

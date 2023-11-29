@@ -1,10 +1,11 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import AuthContext from "../../store/AuthContext";
 
 import {HiOutlineMail } from 'react-icons/hi';
 import {RiLockPasswordLine } from 'react-icons/ri';
+import KakaoLogin from "react-kakao-login";
 
 
 const AuthForm = () => {
@@ -74,6 +75,12 @@ const AuthForm = () => {
         });
     }
 
+    const responseKaKao = (response) => {
+        // Kakao로 로그인 버튼 클릭 시 호출되는 콜백 함수
+        console.log(response);
+      };
+
+
     return (
         <section className="Auth_section">
             <div className="Auth_container">
@@ -101,6 +108,22 @@ const AuthForm = () => {
                     >
                      {isLogin ? '새로운 계정 만들기' : '기존 계정으로 로그인하기'}   
                     </button>
+                </div>
+                <div className="Auth_form">
+                    <span className="Auth_form_line"></span>
+                    간편 로그인
+                    <span className="Auth_form_line"></span>
+                    </div>
+                <div className="auth_btn">
+                    {!isLoading && (
+                        <KakaoLogin
+                        token="7be77ad3cd613bdca9e2ed92267e38ff"
+                        onSuccess={responseKaKao}
+                        onFail={console.error}
+                        onLogout={console.info}
+                      />
+                    )}
+                    {isLoading && <p>Sending request...</p>}
                 </div>
             </form>
             </div>

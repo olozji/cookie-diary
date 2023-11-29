@@ -118,6 +118,11 @@ function App() {
   });
   }
 
+  useEffect(() => {
+    window.Kakao.init('7be77ad3cd613bdca9e2ed92267e38ff');
+  }, []);
+
+
  
   return (
   <DiaryStateContext.Provider value={data}>
