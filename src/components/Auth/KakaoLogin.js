@@ -3,7 +3,7 @@ import KakaoLogin from 'react-kakao-login';
 const KakaoLoginComponent = () => {
 
   const REST_API_KEY = "7be77ad3cd613bdca9e2ed92267e38ff"
-  const REDIRECT_URI = "http://localhost:3000/oauth"
+  const REDIRECT_URI = "http://localhost:3000/auth/kakao/callback"
   const KAKAO_AUTH_URL = `http://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 
@@ -17,6 +17,7 @@ const KakaoLoginComponent = () => {
 
 
   return (
+    <>
     <KakaoLogin
       token="7be77ad3cd613bdca9e2ed92267e38ff"
       onSuccess={responseKaKao}
@@ -24,6 +25,8 @@ const KakaoLoginComponent = () => {
       onLogout={console.info}
       REDIRECT_URI={KAKAO_AUTH_URL}
     />
+    <button href={KAKAO_AUTH_URL}></button>
+    </>
   );
 };
 

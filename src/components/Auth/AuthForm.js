@@ -27,6 +27,11 @@ const AuthForm = () => {
         setIsLogin((prevState)=> !prevState);
     };
 
+  const REST_API_KEY = "7be77ad3cd613bdca9e2ed92267e38ff"
+  const REDIRECT_URI = "http://localhost:3000/oauth"
+  const KAKAO_AUTH_URL = `http://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+
    
     const submitHandler = (e) => {
         e.preventDefault();
@@ -75,11 +80,39 @@ const AuthForm = () => {
         });
     }
 
-    const responseKaKao = (response) => {
-        // Kakao로 로그인 버튼 클릭 시 호출되는 콜백 함수
-        console.log(response);
-      };
 
+// 소셜 로그인 성공
+// const socialLoginSuccess = (res) => {
+//     console.log("소셜 로그인 성공");
+//     console.log(res)
+//     alert('로그인 성공')
+    
+//     authCtx.login();
+//     navigate('/home');
+//   };
+
+const socialLoginSuccess = (res) => {
+    console.log("소셜 로그인 성공");
+    console.log(res);
+    alert('로그인 성공');
+  
+    const { response } = res; // 카카오 응답에서 response 객체를 가져옴
+    const token = response.access_token; // 액세스 토큰
+    const expiresIn = response.expires_in; // 만료 시간 (초 단위)
+  
+    // 만료 시간을 현재 시간 기준으로 계산
+    const expirationTime = new Date(new Date().getTime() + expiresIn * 1000).toISOString();
+  
+    authCtx.login(token, expirationTime);
+    navigate('/home');
+  };
+  
+  // 소셜 로그인 실패
+  const socialLoginFail = (res) => {
+    console.log("소셜 로그인 실패");
+    console.log(res);
+    alert('로그인 실패')
+  };
 
     return (
         <section className="Auth_section">
@@ -117,10 +150,11 @@ const AuthForm = () => {
                 <div className="auth_btn">
                     {!isLoading && (
                         <KakaoLogin
-                        token="7be77ad3cd613bdca9e2ed92267e38ff"
-                        onSuccess={responseKaKao}
-                        onFail={console.error}
+                        token="092eb3b3a380dfd4afcd4f5d605f2217"
+                        onSuccess={(res) => socialLoginSuccess(res)}
+                        onFail={(res) => socialLoginFail(res)}
                         onLogout={console.info}
+                        REDIRECT_URI={KAKAO_AUTH_URL}
                       />
                     )}
                     {isLoading && <p>Sending request...</p>}

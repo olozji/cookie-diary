@@ -51,27 +51,36 @@ export const AuthContextProvider = (props) => {
     const userIsLoggedIn = !!token;
 
 
+    const loginHandler = (token,expirationTime, loginMethod) => {
+
+        const storageKey = `userInfo_${loginMethod}`;
+
+        setToken(token);
+       
+        localStorage.setItem('token', token);
+        localStorage.setItem('expirationTime', expirationTime);
+        localStorage.setItem(storageKey, JSON.stringify({ token, expirationTime }));
+
+        const remainingTime = calculateRemainingTime(expirationTime);
+
+       logoutTimer = setTimeout(logoutHandler(loginMethod),remainingTime);
+    };
+
     const logoutHandler = useCallback(() => {
+
+        const storageKey = `userInfo_${loginMethod}`;
+
         setToken(null);
         localStorage.removeItem('token');
         localStorage.removeItem('expirationTime');
+        localStorage.removeItem(storageKey);
 
         if(logoutTimer){
             clearTimeout(logoutTimer);
         }
     },[]);
 
-
-    const loginHandler = (token,expirationTime) => {
-        setToken(token);
-       
-        localStorage.setItem('token', token);
-        localStorage.setItem('expirationTime', expirationTime);
-
-        const remainingTime = calculateRemainingTime(expirationTime);
-
-       logoutTimer = setTimeout(logoutHandler,remainingTime);
-    };
+    
 
     useEffect(()=>{
         if(tokenData) {
@@ -79,6 +88,23 @@ export const AuthContextProvider = (props) => {
             logoutTimer = setTimeout(logoutHandler,tokenData.duration);
         }
     },[tokenData,logoutHandler]);
+
+    useEffect(() => {
+        const storageKey = `userInfo_${loginMethod}`;
+        const storedUserInfo = JSON.parse(localStorage.getItem(storageKey));
+    
+        if (storedUserInfo) {
+            const { token, expirationTime } = storedUserInfo;
+            const remainingTime = calculateRemainingTime(expirationTime);
+    
+            if (remainingTime > 0) {
+                setToken(token);
+    
+                logoutTimer = setTimeout(logoutHandler(loginMethod), remainingTime);
+            }
+        }
+    }, [loginMethod, logoutHandler]);
+    
 
     const contextValue = {
         token:token,
