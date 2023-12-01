@@ -72,7 +72,7 @@ const AuthForm = () => {
             }
         }).then((data) => {
             const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000));
-            authCtx.login(data.idToken, expirationTime.toISOString());
+            authCtx.login(data.idToken, expirationTime.toISOString(), "email");
             navigate('/home');
         })
           .catch((err) => {
@@ -103,7 +103,7 @@ const socialLoginSuccess = (res) => {
     // 만료 시간을 현재 시간 기준으로 계산
     const expirationTime = new Date(new Date().getTime() + expiresIn * 1000).toISOString();
   
-    authCtx.login(token, expirationTime);
+    authCtx.login(token, expirationTime, "kakao");
     navigate('/home');
   };
   
@@ -167,3 +167,4 @@ const socialLoginSuccess = (res) => {
 };
 
 export default AuthForm;
+

@@ -5,8 +5,8 @@ let logoutTimer;
 const AuthContext = React.createContext({
     token: '',
     isLoggedIn: false,
-    login: (token) => {},
-    logout: () => {},
+    login: (token,loginMethod) => {},
+    logout: (loginMethod) => {},
 });
 
 
@@ -47,63 +47,71 @@ export const AuthContextProvider = (props) => {
     }
     
     const [ token, setToken ] = useState(initialToken);
+    const [loginMethod, setLoginMethod] = useState(""); // loginMethod 추가
 
     const userIsLoggedIn = !!token;
 
 
     const loginHandler = (token,expirationTime, loginMethod) => {
-
+        setLoginMethod(loginMethod);
         const storageKey = `userInfo_${loginMethod}`;
 
         setToken(token);
        
         localStorage.setItem('token', token);
         localStorage.setItem('expirationTime', expirationTime);
+        localStorage.setItem('loginMethod', loginMethod); // 추가
         localStorage.setItem(storageKey, JSON.stringify({ token, expirationTime }));
 
         const remainingTime = calculateRemainingTime(expirationTime);
 
-       logoutTimer = setTimeout(logoutHandler(loginMethod),remainingTime);
+       logoutTimer = setTimeout(() => logoutHandler(loginMethod),remainingTime);
     };
 
-    const logoutHandler = useCallback(() => {
+    const logoutHandler = useCallback((loginMethod) => {
 
         const storageKey = `userInfo_${loginMethod}`;
 
         setToken(null);
         localStorage.removeItem('token');
         localStorage.removeItem('expirationTime');
+        localStorage.removeItem('loginMethod'); // 추가
         localStorage.removeItem(storageKey);
 
         if(logoutTimer){
             clearTimeout(logoutTimer);
         }
-    },[]);
+    },[loginMethod]);
 
     
 
     useEffect(()=>{
-        if(tokenData) {
+        if(tokenData && userIsLoggedIn) {
             console.log(tokenData.duration);
             logoutTimer = setTimeout(logoutHandler,tokenData.duration);
         }
-    },[tokenData,logoutHandler]);
+    },[tokenData,userIsLoggedIn,logoutHandler]);
 
     useEffect(() => {
-        const storageKey = `userInfo_${loginMethod}`;
-        const storedUserInfo = JSON.parse(localStorage.getItem(storageKey));
+        const storedLoginMethod = localStorage.getItem('loginMethod');
+        if (storedLoginMethod) {
+            setLoginMethod(storedLoginMethod);
+            console.log(storedLoginMethod)
+            const storageKey = `userInfo_${storedLoginMethod}`;
+            const storedUserInfo = JSON.parse(localStorage.getItem(storageKey));
+            
+            if (storedUserInfo) {
+                const { token, expirationTime } = storedUserInfo;
+                const remainingTime = calculateRemainingTime(expirationTime);
     
-        if (storedUserInfo) {
-            const { token, expirationTime } = storedUserInfo;
-            const remainingTime = calculateRemainingTime(expirationTime);
+                if (remainingTime > 0) {
+                    setToken(token);
     
-            if (remainingTime > 0) {
-                setToken(token);
-    
-                logoutTimer = setTimeout(logoutHandler(loginMethod), remainingTime);
+                    logoutTimer = setTimeout(() => logoutHandler(storedLoginMethod), remainingTime);
+                }
             }
         }
-    }, [loginMethod, logoutHandler]);
+    }, [logoutHandler]);
     
 
     const contextValue = {
