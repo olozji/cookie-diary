@@ -32,64 +32,8 @@ const AuthForm = () => {
   const KAKAO_AUTH_URL = `http://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 
-   
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        const enteredEmail = emailInputRef.current.value;
-        const enteredPassword = passwordInputRef.current.value;
-
-    
-        setIsLoading(true);
-        let url;
-        if(isLogin){
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCVua7iTTauDBN29gJUxS5BbQ71KlR48_s';
-        } else {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCVua7iTTauDBN29gJUxS5BbQ71KlR48_s';
-        }
-        fetch(
-           url,
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: enteredEmail,
-                    password:enteredPassword,
-                    returnSecureToken:true,
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-    
-        ).then(async (res) => {
-            setIsLoading(false);
-            if(res.ok) {
-                return res.json();
-            } else {
-                const data = await res.json();
-                let errorMessage = '로그인에 실패하였습니다. 아이디 혹은 비밀번호를 확인해주세요';
-                throw new Error(errorMessage);
-            }
-        }).then((data) => {
-            const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000));
-            authCtx.login(data.idToken, expirationTime.toISOString(), "email");
-            navigate('/home');
-        })
-          .catch((err) => {
-            alert(err.message);
-        });
-    }
 
 
-// 소셜 로그인 성공
-// const socialLoginSuccess = (res) => {
-//     console.log("소셜 로그인 성공");
-//     console.log(res)
-//     alert('로그인 성공')
-    
-//     authCtx.login();
-//     navigate('/home');
-//   };
 
 const socialLoginSuccess = (res) => {
     console.log("소셜 로그인 성공");
@@ -120,28 +64,7 @@ const socialLoginSuccess = (res) => {
             <img src={process.env.PUBLIC_URL + `assets/Fortnite-Gingerbread.png`}/>
             <p>감정쿠킹 Diary</p>
             <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-            <form onSubmit={submitHandler} className="auth_form" >
-                <div className="email_input">
-                <HiOutlineMail/>&nbsp;&nbsp;<label htmlFor="email">이메일</label>
-                    <input type='email' id="email" required ref={emailInputRef} />
-                </div>
-                <div className="password_input">
-                    <RiLockPasswordLine />&nbsp;&nbsp;<label htmlFor="password">비밀번호</label>
-                    <input type='password' id="password" required ref={passwordInputRef}/>
-                </div>
-                <div className="auth_btn">
-                    {!isLoading && (
-                         <button className="btn_login">{isLogin ? '로그인' : '새 계정 만들기'}</button>
-                    )}
-                    {isLoading && <p>Sending request...</p>}
-                    <button
-                    type="button"
-                    className="Auth_btn_toggle"
-                    onClick={switchAuthHandler}
-                    >
-                     {isLogin ? '새로운 계정 만들기' : '기존 계정으로 로그인하기'}   
-                    </button>
-                </div>
+            <div className="auth_form" >
                 <div className="Auth_form">
                     <span className="Auth_form_line"></span>
                     간편 로그인
@@ -159,7 +82,7 @@ const socialLoginSuccess = (res) => {
                     )}
                     {isLoading && <p>Sending request...</p>}
                 </div>
-            </form>
+            </div>
             </div>
            
         </section>

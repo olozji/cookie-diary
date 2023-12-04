@@ -51,67 +51,73 @@ export const AuthContextProvider = (props) => {
 
     const userIsLoggedIn = !!token;
 
-
     const loginHandler = (token,expirationTime, loginMethod) => {
         setLoginMethod(loginMethod);
         const storageKey = `userInfo_${loginMethod}`;
+
 
         setToken(token);
        
         localStorage.setItem('token', token);
         localStorage.setItem('expirationTime', expirationTime);
         localStorage.setItem('loginMethod', loginMethod); // 추가
-        localStorage.setItem(storageKey, JSON.stringify({ token, expirationTime }));
+        localStorage.setItem(storageKey, JSON.stringify({ token, expirationTime}));
+
 
         const remainingTime = calculateRemainingTime(expirationTime);
 
        logoutTimer = setTimeout(() => logoutHandler(loginMethod),remainingTime);
+
     };
 
-    const logoutHandler = useCallback((loginMethod) => {
+
+    const logoutHandler = useCallback(() => {
 
         const storageKey = `userInfo_${loginMethod}`;
 
         setToken(null);
         localStorage.removeItem('token');
         localStorage.removeItem('expirationTime');
-        localStorage.removeItem('loginMethod'); // 추가
+        localStorage.removeItem('loginMethod', loginMethod); // 추가
         localStorage.removeItem(storageKey);
+        console.log(storageKey);
+        
 
         if(logoutTimer){
             clearTimeout(logoutTimer);
         }
     },[loginMethod]);
 
-    
 
-    useEffect(()=>{
-        if(tokenData && userIsLoggedIn) {
-            console.log(tokenData.duration);
-            logoutTimer = setTimeout(logoutHandler,tokenData.duration);
-        }
-    },[tokenData,userIsLoggedIn,logoutHandler]);
+    // useEffect(()=>{
+    //     if(tokenData && userIsLoggedIn) {
+    //         console.log(tokenData.duration);
+    //         logoutTimer = setTimeout(logoutHandler,tokenData.duration);
+    //     }
+    // },[tokenData,userIsLoggedIn,logoutHandler]);
 
-    useEffect(() => {
-        const storedLoginMethod = localStorage.getItem('loginMethod');
-        if (storedLoginMethod) {
-            setLoginMethod(storedLoginMethod);
-            console.log(storedLoginMethod)
-            const storageKey = `userInfo_${storedLoginMethod}`;
-            const storedUserInfo = JSON.parse(localStorage.getItem(storageKey));
+    // useEffect(() => {
+    //     const storedLoginMethod = localStorage.getItem('loginMethod');
+    //     if (storedLoginMethod) {
+    //         setLoginMethod(storedLoginMethod);
+    //         console.log(storedLoginMethod)
+
+    //         const storageKey = `userInfo_${storedLoginMethod}`;
+    //         const storedUserInfo = JSON.parse(localStorage.getItem(storageKey));
             
-            if (storedUserInfo) {
-                const { token, expirationTime } = storedUserInfo;
-                const remainingTime = calculateRemainingTime(expirationTime);
+    //         if (storedUserInfo) {
+    //             const { token, expirationTime } = storedUserInfo;
+    //             const remainingTime = calculateRemainingTime(expirationTime);
     
-                if (remainingTime > 0) {
-                    setToken(token);
+    //             if (remainingTime > 0) {
+    //                 setToken(token);
     
-                    logoutTimer = setTimeout(() => logoutHandler(storedLoginMethod), remainingTime);
-                }
-            }
-        }
-    }, [logoutHandler]);
+    //                 logoutTimer = setTimeout(() => logoutHandler(storedLoginMethod), remainingTime);
+    //             }
+    //         }
+    //     }
+    // }, [logoutHandler]);
+
     
 
     const contextValue = {
