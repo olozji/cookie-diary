@@ -29,49 +29,57 @@ const AuthForm = () => {
 
   const REST_API_KEY = "7be77ad3cd613bdca9e2ed92267e38ff"
   const REDIRECT_URI = "http://localhost:3000/oauth"
-  const KAKAO_AUTH_URL = `http://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt=login`;
+  const KAKAO_AUTH_URL = `http://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt='login'`;
 
 
    
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
+
     setIsLoading(true);
-
-    try {
-        const url = isLogin
-            ? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=YOUR_API_KEY'
-            : 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=YOUR_API_KEY';
-
-        const response = await fetch(url, {
+    let url;
+    if(isLogin){
+        url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCVua7iTTauDBN29gJUxS5BbQ71KlR48_s';
+    } else {
+        url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCVua7iTTauDBN29gJUxS5BbQ71KlR48_s';
+    }
+    fetch(
+       url,
+        {
             method: 'POST',
             body: JSON.stringify({
                 email: enteredEmail,
-                password: enteredPassword,
-                returnSecureToken: true,
+                password:enteredPassword,
+                returnSecureToken:true,
             }),
             headers: {
                 'Content-Type': 'application/json',
             },
-        });
-
-        if (!response.ok) {
-            throw new Error('로그인에 실패하였습니다. 아이디 혹은 비밀번호를 확인해주세요');
         }
 
-        const data = await response.json();
+    ).then(async (res) => {
+        setIsLoading(false);
+        if(res.ok) {
+            return res.json();
+        } else {
+            const data = await res.json();
+            let errorMessage = '로그인에 실패하였습니다. 아이디 혹은 비밀번호를 확인해주세요';
+            throw new Error(errorMessage);
+        }
+    }).then((data) => {
         const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000));
         authCtx.login(data.idToken, expirationTime.toISOString());
         navigate('/home');
-    } catch (error) {
-        alert(error.message);
-    } finally {
-        setIsLoading(false);
-    }
-};
+    })
+      .catch((err) => {
+        alert(err.message);
+    });
+}
+
 
 const socialLoginSuccess = (res) => {
     console.log("소셜 로그인 성공");
@@ -95,27 +103,6 @@ const socialLoginSuccess = (res) => {
     console.log(res);
     alert('로그인 실패')
   };
-
-  const kakaoLogoutHandler = async () => {
-    try {
-        const response = await fetch('https://kapi.kakao.com/v1/user/logout', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer 092eb3b3a380dfd4afcd4f5d605f2217`,
-            },
-        });
-
-        if (response.ok) {
-            alert('카카오 계정에서 로그아웃되었습니다.');
-        } else {
-            throw new Error('카카오 로그아웃에 실패했습니다.');
-        }
-    } catch (error) {
-        console.error(error);
-        alert('카카오 로그아웃 중 오류가 발생했습니다.');
-    }
-};
-
 
     return (
         <section className="Auth_section">
@@ -156,7 +143,7 @@ const socialLoginSuccess = (res) => {
                         token="092eb3b3a380dfd4afcd4f5d605f2217"
                         onSuccess={(res) => socialLoginSuccess(res)}
                         onFail={(res) => socialLoginFail(res)}
-                        onLogout={kakaoLogoutHandler}
+                        onLogout={console.info}
                         REDIRECT_URI={KAKAO_AUTH_URL}
                       />
                     )}
