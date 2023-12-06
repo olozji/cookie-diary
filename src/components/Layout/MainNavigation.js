@@ -38,14 +38,33 @@ const MainNavigation = () => {
     authCtx.logout();
   };
 
-  const socialLoginSuccess = () => {
-    console.log('카카오 로그인 성공')
-    authCtx.login();
-  }
 
-  useEffect(() => {
-    //socialLoginSuccess();
-  },[]);
+  const kakaoLogoutHandler = async () => {
+    try {
+      const kakaoToken = "092eb3b3a380dfd4afcd4f5d605f2217"; 
+        const response = await fetch('https://kapi.kakao.com/v1/user/logout', {
+            method: 'POST',
+            headers: {
+                'Authorization': `KakaoAK ${kakaoToken}`,
+            },
+        });
+
+        if (response.ok) {
+          authCtx.logout();
+          response.sessionStorage.clear();				
+          response.localStorage.clear();	
+            alert('카카오 계정에서 로그아웃되었습니다.');
+        } else {
+          const errorMessage = await response.text();
+          console.error(`카카오 로그아웃에 실패했습니다. 오류 메시지: ${errorMessage}`);
+          alert('카카오 로그아웃 중 오류가 발생했습니다.');
+        }
+    } catch (error) {
+        console.error(error);
+        alert('카카오 로그아웃 중 오류가 발생했습니다.');
+    }
+};
+
 
   return (
     <header className="main_nav_header">
@@ -56,6 +75,11 @@ const MainNavigation = () => {
                   <Link to='/'>Login</Link>
               </li>
             )}
+             {isLoggedIn && (
+              <li>
+               <Link to='/profile'>Profile</Link>
+            </li>
+          )}
           {isLoggedIn && (
             <li>
             <Link to='/'><button className='btn_logout' onClick={handleLogout}>Logout</button></Link>

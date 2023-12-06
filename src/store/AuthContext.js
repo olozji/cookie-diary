@@ -89,34 +89,34 @@ export const AuthContextProvider = (props) => {
     },[loginMethod]);
 
 
-    // useEffect(()=>{
-    //     if(tokenData && userIsLoggedIn) {
-    //         console.log(tokenData.duration);
-    //         logoutTimer = setTimeout(logoutHandler,tokenData.duration);
-    //     }
-    // },[tokenData,userIsLoggedIn,logoutHandler]);
+    useEffect(()=>{
+        if(tokenData && userIsLoggedIn) {
+            console.log(tokenData.duration);
+            logoutTimer = setTimeout(logoutHandler,tokenData.duration);
+        }
+    },[tokenData,userIsLoggedIn,logoutHandler]);
 
-    // useEffect(() => {
-    //     const storedLoginMethod = localStorage.getItem('loginMethod');
-    //     if (storedLoginMethod) {
-    //         setLoginMethod(storedLoginMethod);
-    //         console.log(storedLoginMethod)
+    useEffect(() => {
+        const storedLoginMethod = localStorage.getItem('loginMethod');
+        if (storedLoginMethod) {
+            setLoginMethod(storedLoginMethod);
+            console.log(storedLoginMethod)
 
-    //         const storageKey = `userInfo_${storedLoginMethod}`;
-    //         const storedUserInfo = JSON.parse(localStorage.getItem(storageKey));
+            const storageKey = `userInfo_${storedLoginMethod}`;
+            const storedUserInfo = JSON.parse(localStorage.getItem(storageKey));
             
-    //         if (storedUserInfo) {
-    //             const { token, expirationTime } = storedUserInfo;
-    //             const remainingTime = calculateRemainingTime(expirationTime);
+            if (storedUserInfo) {
+                const { token, expirationTime } = storedUserInfo;
+                const remainingTime = calculateRemainingTime(expirationTime);
     
-    //             if (remainingTime > 0) {
-    //                 setToken(token);
+                if (remainingTime > 0) {
+                    setToken(token);
     
-    //                 logoutTimer = setTimeout(() => logoutHandler(storedLoginMethod), remainingTime);
-    //             }
-    //         }
-    //     }
-    // }, [logoutHandler]);
+                    logoutTimer = setTimeout(() => logoutHandler(storedLoginMethod), remainingTime);
+                }
+            }
+        }
+    }, [logoutHandler]);
 
     
 
